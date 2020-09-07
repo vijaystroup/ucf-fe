@@ -35,17 +35,21 @@ def transform_table(table):
         # get questions pdf url
         question = exam_info[1].find(href=True)['href']
         question = url + question
-        print(question)
 
         # get answers pdf url
-
+        answer = exam_info[2].find(href=True)['href']
+        answer = url + answer
 
         # get info pdf url
-
+        info = exam_info[3].find(href=True)['href']
+        info = url + info
 
         # append exam to exams
-        exams[key] = {'1'}
-        break
+        exams[key] = {
+            'question': question,
+            'answer': answer,
+            'info': info
+        }
 
     return exams
 
