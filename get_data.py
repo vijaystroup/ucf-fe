@@ -63,20 +63,19 @@ def transform_table(table):
     return exams
 
 
-if __name__ == '__main__':
-    url = 'http://www.cs.ucf.edu/registration/exm/'
+url = 'http://www.cs.ucf.edu/registration/exm/'
 
-    # page
-    page = get_page(url)
-    if isinstance(page, tuple):
-        print('error page')
+# page
+page = get_page(url)
+if isinstance(page, tuple):
+    print('error page')
 
-    # table
-    table = page.find_all('table')[1]
-    if isinstance(table, tuple):
-        print('error table')
+# table
+table = page.find_all('table')[1]
+if isinstance(table, tuple):
+    print('error table')
 
-    # exams
-    exams = transform_table(table)
-    if isinstance(exams, tuple):
-        print('error exams')
+# exams
+exams = transform_table(table)
+if isinstance(exams, tuple):
+    print('error exams')
