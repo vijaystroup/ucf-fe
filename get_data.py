@@ -16,4 +16,5 @@ def get_page(url):
 if __name__ == '__main__':
     url = 'http://www.cs.ucf.edu/registration/exm/'
     page = get_page(url)
-    print(page)
+    table = page.find_all('table')[1]
+    print(table)
