@@ -25,8 +25,29 @@ def transform_table(table):
 
     exams = {}
     for row in rows[::2]:
-        print(row.findChildren('td'))
-        print()
+        exam_info = row.findChildren('td')
+
+        # make dict key
+        key = exam_info[0].text.split(' ')
+        key.pop(1)
+        key = (' ').join(key)
+
+        # get questions pdf url
+        question = exam_info[1].find(href=True)['href']
+        question = url + question
+        print(question)
+
+        # get answers pdf url
+
+
+        # get info pdf url
+
+
+        # append exam to exams
+        exams[key] = {'1'}
+        break
+
+    return exams
 
 
 if __name__ == '__main__':
@@ -35,4 +56,5 @@ if __name__ == '__main__':
     page = get_page(url)
 
     table = page.find_all('table')[1]
-    transform_table(table)
+    exams = transform_table(table)
+    print(exams)
