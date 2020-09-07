@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-import re
 import requests
 
 
@@ -12,46 +11,47 @@ def get_page(url):
         try:
             return BeautifulSoup(req.text, features='lxml')
         except Exception as e:
-            return e
-    return f'error requesting: {url}\nstatus: {req.status_code}'
+            return (-1, e)
+    return (-1, f'error requesting: {url}\nstatus: {req.status_code}')
 
 
 def transform_table(table):
     """take in the souped table and transform it to a dictionary with
     the key being the date and the values being the pdf links."""
 
-    try:
-        rows = table.findChildren('tr')
-        rows.pop(0) # remove info row
-    except Exception as e:
-        return f'error finding "tr" children: {e}'
+    rows = table.findChildren('tr')
+    if len(rows) < 1: # check to make sure there are children
+        return (-1, f'error finding "tr" children')
+    rows.pop(0) # remove info row
 
     exams = {}
     for row in rows[::2]:
-        try:
-            exam_info = row.findChildren('td')
-        except Exception as e:
-            return f'error finding "td" children: {e}'
+        exam_info = row.findChildren('td')
+        if len(exam_info) < 1:
+            return (-1, f'error finding "td" children')
 
-        try:
-            # make dict key
-            key = exam_info[0].text.split(' ')
-            key.pop(1)
-            key = (' ').join(key)
+        # make dict key
+        key = exam_info[0].text.split(' ')
+        key.pop(1)
+        key = (' ').join(key)
 
-            # get questions pdf url
-            question = exam_info[1].find(href=True)['href']
-            question = url + question
+        # get questions pdf url
+        question = exam_info[1].find(href=True)['href']
+        if question is None:
+            return (-1, 'error finding question href')
+        question = url + question
 
-            # get answers pdf url
-            answer = exam_info[2].find(href=True)['href']
-            answer = url + answer
+        # get answers pdf url
+        answer = exam_info[2].find(href=True)['href']
+        if answer is None:
+            return (-1, 'error finding answer href')
+        answer = url + answer
 
-            # get info pdf url
-            info = exam_info[3].find(href=True)['href']
-            info = url + info
-        except Exception as e:
-            return f'error getting dict attributes: {e}'
+        # get info pdf url
+        info = exam_info[3].find(href=True)['href']
+        if info is None:
+            return (-1, 'error finding info href')
+        info = url + info
 
         # append exam to exams
         exams[key] = {
@@ -66,8 +66,17 @@ def transform_table(table):
 if __name__ == '__main__':
     url = 'http://www.cs.ucf.edu/registration/exm/'
 
+    # page
     page = get_page(url)
+    if isinstance(page, tuple):
+        print('error page')
 
+    # table
     table = page.find_all('table')[1]
+    if isinstance(table, tuple):
+        print('error table')
+
+    # exams
     exams = transform_table(table)
-    print(exams)
+    if isinstance(exams, tuple):
+        print('error exams')
