@@ -1,5 +1,11 @@
+import os
 from bs4 import BeautifulSoup
 import requests
+
+path = os.path.abspath(os.path.dirname(__name__)) + '/'
+question_dir = path + 'data/question/'
+answer_dir = path + 'data/answer/'
+info_dir = path + 'data/info/'
 
 
 def get_page(url):
@@ -63,19 +69,31 @@ def transform_table(table):
     return exams
 
 
-url = 'http://www.cs.ucf.edu/registration/exm/'
+def dl_pdf(exams):
+    for key in exams:
+        link = exams[key]['question']
+        r = requests.get(link)
+        open(question_dir + link.split('/')[-1], 'wb').write(r.content)
+        break
 
-# page
-page = get_page(url)
-if isinstance(page, tuple):
-    print('error page')
 
-# table
-table = page.find_all('table')[1]
-if isinstance(table, tuple):
-    print('error table')
+if __name__ == '__main__':
+    url = 'http://www.cs.ucf.edu/registration/exm/'
 
-# exams
-exams = transform_table(table)
-if isinstance(exams, tuple):
-    print('error exams')
+    # page
+    page = get_page(url)
+    if isinstance(page, tuple):
+        print('error page')
+
+    # table
+    table = page.find_all('table')[1]
+    if isinstance(table, tuple):
+        print('error table')
+
+    # exams
+    exams = transform_table(table)
+    if isinstance(exams, tuple):
+        print('error exams')
+
+    # download pdfs
+    dl_pdf(exams)
