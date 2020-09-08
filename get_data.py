@@ -3,9 +3,9 @@ from bs4 import BeautifulSoup
 import requests
 
 path = os.path.abspath(os.path.dirname(__name__)) + '/'
-question_dir = path + 'data/question/'
-answer_dir = path + 'data/answer/'
-info_dir = path + 'data/info/'
+question_dir = path + 'static/question/'
+answer_dir = path + 'static/answer/'
+info_dir = path + 'static/info/'
 
 
 def get_page(url):
