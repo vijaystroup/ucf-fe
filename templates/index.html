@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ucf-fe</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
-    <div style="height: 100%">
+    <div class="question">
         <iframe 
-            src={{ url_for("static", filename="question/FE-Aug20.pdf") }}
+            src="{{ url_for('static', filename='question/FE-Aug20.pdf') }}"
             height="300"
             width="50%"
         ></iframe>

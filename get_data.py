@@ -2,10 +2,7 @@ import os
 from bs4 import BeautifulSoup
 import requests
 
-path = os.path.abspath(os.path.dirname(__name__)) + '/'
-question_dir = path + 'static/question/'
-answer_dir = path + 'static/answer/'
-info_dir = path + 'static/info/'
+path = os.path.abspath(os.path.dirname(__name__)) + '/static/raw_tests'
 
 
 def get_page(url):
@@ -45,19 +42,19 @@ def transform_table(table):
         question = exam_info[1].find(href=True)['href']
         if question is None:
             return (-1, 'error finding question href')
-        question = url + question
+        question = url + path
 
         # get answers pdf url
         answer = exam_info[2].find(href=True)['href']
         if answer is None:
             return (-1, 'error finding answer href')
-        answer = url + answer
+        answer = url + path
 
         # get info pdf url
         info = exam_info[3].find(href=True)['href']
         if info is None:
             return (-1, 'error finding info href')
-        info = url + info
+        info = url + path
 
         # append exam to exams
         exams[key] = {
