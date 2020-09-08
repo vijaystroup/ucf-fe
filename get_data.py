@@ -12,7 +12,7 @@ def get_page(url):
     """request the url for the past exams and return the soup for
     that request. if unable to get the page, return error message."""
 
-    req = requests.get(url)
+    req = requests.get(url, timeout=3)
     if req.status_code == 200:
         try:
             return BeautifulSoup(req.text, features='lxml')
@@ -72,7 +72,7 @@ def transform_table(table):
 def dl_pdf(exams):
     for key in exams:
         link = exams[key]['question']
-        r = requests.get(link)
+        r = requests.get(link, timeout=3)
         open(question_dir + link.split('/')[-1], 'wb').write(r.content)
         break
 
