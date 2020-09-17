@@ -11,10 +11,18 @@ info_dir = path + 'info/'
 input1 = PdfFileReader(open(raw_dir + 'FE-Aug20.pdf', 'rb'))
 input2 = PdfFileReader(open(raw_dir + 'FE-Aug15.pdf', 'rb'))
 input3 = PdfFileReader(open(raw_dir + 'FE-May18.pdf', 'rb'))
-text = input3.getPage(1).extractText().splitlines()
-print(text)
-rec = re.compile('([1-9])\)')
-for i in text:
-    res = re.search(rec, i)
-    if res is not None:
-        print(res.group(0))
+
+recQ = re.compile('^([1-9])\)')
+recP = re.compile('^(Page)')
+
+
+def getQuestion(pdf):
+    for page in range(pdf.getNumPages()):
+        text = pdf.getPage(page).extractText().splitlines()
+        for i in text:
+            resQ = re.search(recQ, i)
+            if resQ is not None:
+                print(resQ.group(0), page)
+
+
+getQuestion(input1)
