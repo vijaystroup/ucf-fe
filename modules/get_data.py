@@ -2,7 +2,7 @@ import os
 from bs4 import BeautifulSoup
 import requests
 
-path = os.path.abspath(os.path.dirname(__name__)) + '/static/raw_tests'
+path = os.path.abspath(os.path.dirname(__name__)) + '/static/raw_question'
 
 
 def get_page(url):
