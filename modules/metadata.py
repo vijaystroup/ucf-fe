@@ -1,3 +1,10 @@
+"""
+Metadata found in here contain a questions and answers dictionary.
+The dictionaries contain a key of a test pdf with a sub dictionary that
+contains the question number with its values being a tuple of the page that
+starts the question/answer and the ending page.
+"""
+
 questions = {
     'FE-Aug20.pdf': {
         1: (2,2),
