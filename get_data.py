@@ -42,19 +42,19 @@ def transform_table(table):
         question = exam_info[1].find(href=True)['href']
         if question is None:
             return (-1, 'error finding question href')
-        question = url + path
+        question = url + question
 
         # get answers pdf url
         answer = exam_info[2].find(href=True)['href']
         if answer is None:
             return (-1, 'error finding answer href')
-        answer = url + path
+        answer = url + answer
 
         # get info pdf url
         info = exam_info[3].find(href=True)['href']
         if info is None:
             return (-1, 'error finding info href')
-        info = url + path
+        info = url + info
 
         # append exam to exams
         exams[key] = {
@@ -67,11 +67,13 @@ def transform_table(table):
 
 
 def dl_pdf(exams):
+    pre_existing = os.listdir(path)
     for key in exams:
         link = exams[key]['question']
-        r = requests.get(link, timeout=3)
-        open(question_dir + link.split('/')[-1], 'wb').write(r.content)
-        break
+        link_name = link.split('/')[-1]
+        if link_name not in pre_existing:
+            r = requests.get(link, timeout=3)
+            open(f'{path}/' + link_name, 'wb').write(r.content)
 
 
 if __name__ == '__main__':
