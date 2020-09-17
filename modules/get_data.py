@@ -1,6 +1,7 @@
 import os
 from bs4 import BeautifulSoup
 import requests
+from data_transform import make_questions
 
 path = os.path.abspath(os.path.dirname(__name__)) + '/static/raw_question'
 
@@ -74,6 +75,7 @@ def dl_pdf(exams):
         if link_name not in pre_existing:
             r = requests.get(link, timeout=3)
             open(f'{path}/' + link_name, 'wb').write(r.content)
+            # make_questions()
 
 
 if __name__ == '__main__':

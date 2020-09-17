@@ -22,12 +22,14 @@ def pre_existing_q(search):
     return False
 
 
-def make_question():
+def make_questions():
     """make small question pdfs using metadata"""
 
     for q in raw_q:
         if not pre_existing_q(q):
-            pdf = PdfFileReader(open(raw_dir + raw_q[i], 'rb'))
+            pdf = PdfFileReader(open(path_raw + f'/{q}', 'rb'))
+            # print(pdf.getPage(1).extractText().splitlines())
+            writer = PdfFileWriter()
 
 
-make_question()
+make_questions()
