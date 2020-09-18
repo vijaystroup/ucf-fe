@@ -4,22 +4,38 @@ import metadata as md
 
 # paths
 path = os.path.abspath(os.path.dirname(__name__)) + '/static'
-path_raw = path + '/raw_question'
+raw_question = path + '/raw_question'
 path_question = path + '/question'
+raw_answer = path + '/raw_answer'
+path_answer = path + '/answer'
 
-# raw question and questions created pdfs
-raw_q = os.listdir(path_raw)
-created_q = os.listdir(path_question)
+
+def write_pdf(mode_path, name, key, val, pdf):
+    name = name.split('.')[0]
+    writer = PdfFileWriter()
+    for i in range(val[0]-1, val[1]):
+        writer.addPage(pdf.getPage(i))
+    with open(f'{mode_path}/{name}-{key}.pdf', 'wb') as f:
+        writer.write(f)
 
 
 def make_questions(name):
     """make small question pdfs using metadata"""
 
-    pdf = PdfFileReader(open(path_raw + f'/{name}', 'rb'))
+    pdf = PdfFileReader(open(raw_question + f'/{name}', 'rb'))
     for key, val in md.questions[name].items():
-        writer = PdfFileWriter()
-        name = name.split('.')[0]
-        for i in range(val[0]-1, val[1]):
-            writer.addPage(pdf.getPage(i))
-        with open(f'{path_question}/{name}-{key}.pdf', 'wb') as f:
-            writer.write(f)
+        write_pdf(path_question, name, key, val, pdf)
+        # writer = PdfFileWriter()
+        # name = name.split('.')[0]
+        # for i in range(val[0]-1, val[1]):
+        #     writer.addPage(pdf.getPage(i))
+        # with open(f'{path_question}/{name}-{key}.pdf', 'wb') as f:
+        #     writer.write(f)
+
+
+def make_answers(name):
+    """make small answer pdfs using metadata"""
+
+    pdf = PdfFileReader(open(raw_answer + f'/{name}', 'rb'))
+    for key, val in md.answers[name].items():
+        write_pdf(path_answer, name, key, val, pdf)

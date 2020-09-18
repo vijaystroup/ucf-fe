@@ -1,9 +1,9 @@
 import os
 from bs4 import BeautifulSoup
 import requests
-from data_transform import make_questions
+from data_transform import make_questions, make_answers
 
-path = os.path.abspath(os.path.dirname(__name__)) + '/static/raw_question'
+path = os.path.abspath(os.path.dirname(__name__)) + '/static'
 
 
 def get_page(url):
@@ -51,32 +51,32 @@ def transform_table(table):
             return (-1, 'error finding answer href')
         answer = url + answer
 
-        # get info pdf url
-        info = exam_info[3].find(href=True)['href']
-        if info is None:
-            return (-1, 'error finding info href')
-        info = url + info
-
         # append exam to exams
         exams[key] = {
             'question': question,
             'answer': answer,
-            'info': info
         }
 
     return exams
 
 
 def dl_pdf(exams):
-    pre_existing = os.listdir(path)
+    pre_existing = os.listdir(f'{path}/raw_question')
+
     for key in exams:
-        link = exams[key]['question']
-        link_name = link.split('/')[-1]
-        if link_name not in pre_existing:
-            r = requests.get(link, timeout=3)
-            with open(f'{path}/' + link_name, 'wb') as f:
-                f.write(r.content)
-            make_questions(link_name)
+        linkQ, linkA = exams[key]['question'], exams[key]['answer']
+        link_nameQ, link_nameA = linkQ.split('/')[-1], linkA.split('/')[-1]
+
+        if link_nameQ not in pre_existing:
+            rQ, rA = requests.get(linkQ, timeout=1), requests.get(linkA, timeout=1)
+
+            with open(f'{path}/raw_question/' + link_nameQ, 'wb') as f:
+                f.write(rQ.content)
+            make_questions(link_nameQ)
+
+            with open(f'{path}/raw_answer/' + link_nameA, 'wb') as f:
+                f.write(rA.content)
+            make_answers(link_nameA)
 
 
 if __name__ == '__main__':
