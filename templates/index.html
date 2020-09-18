@@ -6,14 +6,15 @@
     <title>ucf-fe</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}" defer></script>
     </head>
-<body class="light">
+<body>
     <main>
         <div class="cols nav">
             <h1 id="title">UCF Foundation Exam Practice</h1>
             <div class="cols tools">
                 <button id="startstop"><i class="fas fa-play"></i></button>
-                <button id="theme"><i class="fas fa-adjust"></i></button>
+                <button onclick="switchTheme()"><i id="theme" class="fas fa-adjust"></i></button>
                 <p id="timer">09:32</p>
             </div>
         </div>
