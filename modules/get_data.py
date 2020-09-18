@@ -51,10 +51,18 @@ def transform_table(table):
             return (-1, 'error finding answer href')
         answer = url + answer
 
+        # get info pdf url
+        info = exam_info[3].find(href=True)['href']
+        if info is None:
+            return (-1, 'error finding info href')
+        info = url + info
+        print(info)
+
         # append exam to exams
         exams[key] = {
             'question': question,
             'answer': answer,
+            'info': info
         }
 
     return exams
@@ -64,11 +72,11 @@ def dl_pdf(exams):
     pre_existing = os.listdir(f'{path}/raw_question')
 
     for key in exams:
-        linkQ, linkA = exams[key]['question'], exams[key]['answer']
-        link_nameQ, link_nameA = linkQ.split('/')[-1], linkA.split('/')[-1]
+        linkQ, linkA, linkI = exams[key]['question'], exams[key]['answer'], exams[key]['info']
+        link_nameQ, link_nameA, link_nameI = linkQ.split('/')[-1], linkA.split('/')[-1], linkI.split('/')[-1]
 
         if link_nameQ not in pre_existing:
-            rQ, rA = requests.get(linkQ, timeout=1), requests.get(linkA, timeout=1)
+            rQ, rA, rI = requests.get(linkQ, timeout=1), requests.get(linkA, timeout=1), requests.get(linkI, timeout=1)
 
             with open(f'{path}/raw_question/' + link_nameQ, 'wb') as f:
                 f.write(rQ.content)
@@ -78,12 +86,15 @@ def dl_pdf(exams):
                 f.write(rA.content)
             make_answers(link_nameA)
 
+            with open(f'{path}/info/' + link_nameI, 'wb') as f:
+                f.write(rI.content)
+
 
 if __name__ == '__main__':
     url = 'http://www.cs.ucf.edu/registration/exm/'
 
     # make dirs if not there
-    dirs = ['/raw_question', '/raw_answer', '/question', '/answer']
+    dirs = ['/raw_question', '/raw_answer', '/question', '/answer', '/info']
     for d in dirs:
         if not os.path.exists(path + d):
             os.makedirs(path + d)

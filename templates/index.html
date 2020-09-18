@@ -10,24 +10,25 @@
 <body>
     <main>
         <div class="cols nav">
-            <h1 id="title">UCF Foundation Exam Practice</h1>
+            <!-- <h1 id="title">UCF Foundation Exam Practice</h1> -->
+            <h1 id="title">{{ question_info }}</h1>
             <div class="cols tools">
-                <button id="startstop"><i class="fas fa-play fa-fw"></i></button>
-                <button id="theme"><i class="fas fa-moon fa-fw"></i></button>
-                <p id="timer"><i class="fas fa-clock fa-fw"></i> 09:32</p>
+                <button id="startstop"><i class="fas fa-play"></i></button>
+                <button id="theme"><i class="fas fa-adjust"></i></button>
+                <p id="timer">09:32</p>
             </div>
         </div>
         <div class="cols content">
             <div class="col left">
                 <iframe
-                    src="{{ url_for('static', filename='question/FE-Aug20-1.pdf') }}"
+                    src="{{ url_for('static', filename='question/'+question) }}"
                 ></iframe>
             </div>
             <div class="col right">
                 <textarea>Your solution here...</textarea>
                 <div class="info">
                     <h2>Exam Info</h2>
-                    <p><a>Refrence Sheet</a></p>
+                    <p><a href="{{ url_for('static', filename='misc/FE-FormulaSheet.pdf') }}" target="_blank">Refrence Sheet</a></p>
                     <p><a>Exam Statistics</a></p>
                 </div>
                 <div class="report">

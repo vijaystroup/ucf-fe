@@ -42,6 +42,10 @@ main {
     justify-content: space-between;
 }
 
+.nav p {
+    margin: 0;
+}
+
 .tools {
     padding-right: 1rem;
 }
@@ -51,6 +55,18 @@ main {
     size: 1.5rem;
     margin-left: 1rem;
     margin-right: .5rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.tools button:hover {
+    transform: scale(1.1);
+}
+
+.fas {
+    font-size: 2rem;
 }
 
 .content {
@@ -82,5 +98,6 @@ footer {
 
 #timer {
     padding-left: 1rem;
-    font-size: 1.5rem;
+    padding-top: .5rem;
+    font-size: 2rem;
 }
