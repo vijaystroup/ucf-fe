@@ -12,24 +12,14 @@ raw_q = os.listdir(path_raw)
 created_q = os.listdir(path_question)
 
 
-def pre_existing_q(search):
-    """check to see if we have already created questions for a specific test"""
-
-    search = search.split('-')[1].split('.')[0]
-    for q in created_q:
-        if search in q:
-            return True
-    return False
-
-
-def make_questions():
+def make_questions(name):
     """make small question pdfs using metadata"""
 
-    for q in raw_q:
-        if not pre_existing_q(q):
-            pdf = PdfFileReader(open(path_raw + f'/{q}', 'rb'))
-            # print(pdf.getPage(1).extractText().splitlines())
-            writer = PdfFileWriter()
-
-
-make_questions()
+    pdf = PdfFileReader(open(path_raw + f'/{name}', 'rb'))
+    for key, val in md.questions[name].items():
+        writer = PdfFileWriter()
+        name = name.split('.')[0]
+        for i in range(val[0]-1, val[1]):
+            writer.addPage(pdf.getPage(i))
+        with open(f'{path_question}/{name}-{key}.pdf', 'wb') as f:
+            writer.write(f)

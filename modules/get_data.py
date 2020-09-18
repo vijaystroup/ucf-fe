@@ -74,8 +74,9 @@ def dl_pdf(exams):
         link_name = link.split('/')[-1]
         if link_name not in pre_existing:
             r = requests.get(link, timeout=3)
-            open(f'{path}/' + link_name, 'wb').write(r.content)
-            # make_questions()
+            with open(f'{path}/' + link_name, 'wb') as f:
+                f.write(r.content)
+            make_questions(link_name)
 
 
 if __name__ == '__main__':
