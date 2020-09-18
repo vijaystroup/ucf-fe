@@ -134,6 +134,10 @@ footer {
     font-size: 2rem;
 }
 
+#start {
+    color: rgb(31, 231, 31);
+}
+
 #theme {
     transition: transform 300ms ease;
     color: var(--text-primary);
