@@ -25,12 +25,6 @@ def make_questions(name):
     pdf = PdfFileReader(open(raw_question + f'/{name}', 'rb'))
     for key, val in md.questions[name].items():
         write_pdf(path_question, name, key, val, pdf)
-        # writer = PdfFileWriter()
-        # name = name.split('.')[0]
-        # for i in range(val[0]-1, val[1]):
-        #     writer.addPage(pdf.getPage(i))
-        # with open(f'{path_question}/{name}-{key}.pdf', 'wb') as f:
-        #     writer.write(f)
 
 
 def make_answers(name):

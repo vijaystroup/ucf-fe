@@ -82,6 +82,12 @@ def dl_pdf(exams):
 if __name__ == '__main__':
     url = 'http://www.cs.ucf.edu/registration/exm/'
 
+    # make dirs if not there
+    dirs = ['/raw_question', '/raw_answer', '/question', '/answer']
+    for d in dirs:
+        if not os.path.exists(path + d):
+            os.makedirs(path + d)
+
     # page
     page = get_page(url)
     if isinstance(page, tuple):
