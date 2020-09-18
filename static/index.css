@@ -1,9 +1,86 @@
 html, body {
+    height: 100vh;
+    margin: 0;
     padding: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cols {
+    display: flex;
+    align-items: center;
+}
+
+.col {
+    height: 100%;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    margin-left: 1rem;
+}
+
+.right textarea {
+    width: 97%;
+    height: 50%;
+    resize: none;
+}
+
+.col iframe {
+    height: 100%;
+    border-width: 0;
+    width: 100%;
+}
+
+.nav {
+    justify-content: space-between;
+}
+
+.tools {
+    padding-right: 1rem;
+}
+
+.tools button {
+    padding: .5rem;
+    size: 1.5rem;
+    margin-left: 1rem;
+    margin-right: .5rem;
+}
+
+.content {
+    flex: 1 1 auto;
+}
+
+.info {
+    padding-top: 2rem;
+    font-size: 1.2rem;
+}
+
+.report {
+    font-size: 1.2rem;
+    flex-grow: 1;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+#title {
+    font-size: 1.5rem;
+    padding: 1rem;
     margin: 0;
 }
 
-.question {
-    flex-direction: row;
-    height: 100%;
+#timer {
+    padding-left: 1rem;
+    font-size: 1.5rem;
 }
