@@ -6,19 +6,10 @@ function switchTheme() {
 }
 
 function startTimer() {
-  timer.innerHTML = -0.50.toFixed(2)
+  timer.innerHTML = 10.00.toFixed(2).replace('.', ':')
 
   setInterval(function() {
-    let time = +(timer.innerHTML)
-
-    // if (time % 1 == 0 || time % 1 == 59) {
-    //   if (time > 0) {
-    //     time = time - .40
-    //   }
-    //   else if (time < 0) {
-    //     time = time - .40
-    //   }
-    // }
+    let time = +(timer.innerHTML.replace(':', '.'))
 
     if (time > 1) {
       if (time % 1 == 0) {
@@ -26,14 +17,11 @@ function startTimer() {
       }
     }
     else if (time < 1) {
-      if (Math.abs(time) % 1 == 59) {
+      if ((Math.abs(time) % 1).toFixed(2) == .59) {
         time = time - .40
       }
     }
 
-
-
-
-    timer.innerHTML = (Math.round((time - .01) * 100) / 100).toFixed(2)
+    timer.innerHTML = (Math.round((time - .01) * 100) / 100).toFixed(2).replace('.', ':')
   }, 1000)
 }
