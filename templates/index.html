@@ -20,7 +20,7 @@
         </div>
         <div class="cols content">
             <div class="col left">
-                <iframe
+                <iframe id="pdf"
                     src="{{ url_for('static', filename='question/'+question) }}"
                 ></iframe>
             </div>
@@ -29,12 +29,7 @@
                 <div class="info">
                     <h2>Exam Info</h2>
                     <p><a href="{{ url_for('static', filename='misc/FE-FormulaSheet.pdf') }}" target="_blank">Refrence Sheet</a></p>
-                    <p><a href="{{ url_for('static', filename='info/'+question_info+'.pdf') }}" target="_blank">Exam Statistics</a></p>
-                </div>
-                <div class="report">
-                    <h2>Report</h2>
-                    <p>Your Time Left: 03:23</p>
-                    <p>Hit the play button again to get another question.</p>
+                    <p><a id="stats" href="{{ url_for('static', filename='info/'+question_info+'.pdf') }}" target="_blank">Exam Statistics</a></p>
                 </div>
                 <footer>
                     <p>Made by <span><a href="https://www.vijaystroup.com" target="_blank">Vijay Stroup</a></span> for my fellow Knights</p>

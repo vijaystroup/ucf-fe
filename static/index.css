@@ -104,20 +104,11 @@ a {
 .info {
     padding-top: 2rem;
     font-size: 1.2rem;
-}
-
-.info h2, .report h2 {
-    margin-bottom: 0;
-}
-
-.report {
-    font-size: 1.2rem;
     flex-grow: 1;
 }
 
-.report p {
-    display: none;
-    /* display: inherit; */
+.info h2 {
+    margin-bottom: 0;
 }
 
 footer {

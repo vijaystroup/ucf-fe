@@ -1,12 +1,17 @@
+// elements
 const playStop = document.getElementById('play-stop')
 const playBtn = playStop.firstElementChild
 const timer = document.getElementById('timer')
 const reportDiv = document.getElementsByClassName('report')
+const pdf = document.getElementById('pdf')
+const stats = document.getElementById('stats')
 
+// theme
 function switchTheme() {
   document.body.classList.toggle('dark')
 }
 
+// stop button
 function makeStopBtn() {
   const stopBtn = playBtn.cloneNode()
   stopBtn.classList = 'fas fa-stop'
@@ -19,7 +24,15 @@ function makeStopBtn() {
   return stopBtn
 }
 
+// timer
 function startTimer() {
+  fetch('/question')
+    .then(res => res.json())
+    .then(data => {
+      pdf.src = data.question
+      stats.href = data.info
+    })
+
   timer.innerHTML = 10.00.toFixed(2).replace('.', ':')
   playBtn.remove()
   playStop.append(makeStopBtn())
