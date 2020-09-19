@@ -27,24 +27,20 @@ function makeStopBtn() {
 
 // timer
 function startTimer() {
-  fetch('/question')
-    .then(res => res.json())
-    .then(data => {
-      pdf.src = data.question
-      stats.href = data.info
-      stats.target = '_blank'
-    })
+  pdf.src = data.question
+  stats.href = data.info
+  stats.target = '_blank'
 
   textArea.value = 'Your solution here...'
 
-
+  
   timer.innerHTML = 10.00.toFixed(2).replace('.', ':')
   playBtn.remove()
   playStop.append(makeStopBtn())
-
+  
   window.clock = setInterval(function() {
     let time = +(timer.innerHTML.replace(':', '.'))
-  
+    
     if (time > 1) {
       if (time % 1 == 0) {
         time = time - .40
@@ -55,12 +51,14 @@ function startTimer() {
         time = time - .40
       }
     }
-  
+    
     timer.innerHTML = (Math.round((time - .01) * 100) / 100).toFixed(2).replace('.', ':')
   }, 1000)
 }
 
 function stopTimer(stopBtn) {
+  fetchExam()
+  pdf.src = data.answer
   stopBtn.remove()
   playStop.append(playBtn)
   clearInterval(window.clock)
@@ -77,5 +75,18 @@ textArea.onkeydown = function(e) {
       var s = this.selectionStart;
       this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
       this.selectionEnd = s+1; 
+  }
+}
+
+// api
+fetchExam() // inital fetch
+let data;
+function fetchExam() {
+  try {
+      fetch('/question')
+        .then (function(u) {return u.json()})
+        .then (function(json) {data = json})
+  } catch (error) {
+      console.error(error);
   }
 }
