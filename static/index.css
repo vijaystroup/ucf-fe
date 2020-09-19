@@ -138,6 +138,10 @@ footer {
     color: rgb(31, 231, 31);
 }
 
+#stop {
+    color: red;
+}
+
 #theme {
     transition: transform 300ms ease;
     color: var(--text-primary);
