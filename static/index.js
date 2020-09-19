@@ -1,6 +1,7 @@
 const playStop = document.getElementById('play-stop')
 const playBtn = playStop.firstElementChild
 const timer = document.getElementById('timer')
+const reportDiv = document.getElementsByClassName('report')
 
 function switchTheme() {
   document.body.classList.toggle('dark')

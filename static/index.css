@@ -115,6 +115,11 @@ a {
     flex-grow: 1;
 }
 
+.report p {
+    display: none;
+    /* display: inherit; */
+}
+
 footer {
     display: flex;
     justify-content: space-between;
