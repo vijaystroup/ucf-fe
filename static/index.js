@@ -5,6 +5,7 @@ const timer = document.getElementById('timer')
 const reportDiv = document.getElementsByClassName('report')
 const pdf = document.getElementById('pdf')
 const stats = document.getElementById('stats')
+const textArea = document.getElementsByTagName('textarea')[0]
 
 // theme
 function switchTheme() {
@@ -31,7 +32,11 @@ function startTimer() {
     .then(data => {
       pdf.src = data.question
       stats.href = data.info
+      stats.target = '_blank'
     })
+
+  textArea.value = 'Your solution here...'
+
 
   timer.innerHTML = 10.00.toFixed(2).replace('.', ':')
   playBtn.remove()
@@ -64,3 +69,13 @@ function stopTimer(stopBtn) {
 playBtn.addEventListener('click', function() {
   startTimer()
 })
+
+// textarea tab
+textArea.onkeydown = function(e) {
+  if (e.keyCode == 9 || e.which == 9) {
+      e.preventDefault();
+      var s = this.selectionStart;
+      this.value = this.value.substring(0,this.selectionStart) + "\t" + this.value.substring(this.selectionEnd);
+      this.selectionEnd = s+1; 
+  }
+}
