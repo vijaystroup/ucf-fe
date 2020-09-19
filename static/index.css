@@ -1,15 +1,17 @@
 html, body {
-    --bg-primary: #F0F0F0;
-    --bg-secondary: white;
-    --text-primary: black;
-    --text-secondary: blue;
-
     height: 100vh;
     margin: 0;
     padding: 0;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     transition: background 300ms ease;
+}
+
+.light {
+    --bg-primary: #F0F0F0;
+    --bg-secondary: white;
+    --text-primary: black;
+    --text-secondary: blue;
 }
 
 .dark {

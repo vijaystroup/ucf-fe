@@ -8,8 +8,24 @@ const stats = document.getElementById('stats')
 const textArea = document.getElementsByTagName('textarea')[0]
 
 // theme
+localStorage.getItem('theme')
+  ? document.body.className = localStorage.getItem('theme')
+  : (
+    localStorage.setItem('theme', 'light'),
+    document.body.className = 'light'
+  )
+
 function switchTheme() {
-  document.body.classList.toggle('dark')
+  // document.body.classList.toggle('dark')
+  const theme = document.body.className
+
+  if (theme == 'light') {
+    document.body.className = 'dark'
+  }
+  else {
+    document.body.className = 'light'
+  }
+  localStorage.setItem('theme', document.body.className)
 }
 
 // stop button
