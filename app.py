@@ -9,6 +9,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
 
 @app.route('/question')
 def question():
