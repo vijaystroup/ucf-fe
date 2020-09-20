@@ -56,7 +56,6 @@ def transform_table(table):
         if info is None:
             return (-1, 'error finding info href')
         info = url + info
-        print(info)
 
         # append exam to exams
         exams[key] = {
