@@ -11,10 +11,10 @@ services:
         - traefik.enable=true
         - traefik.docker.network=traefik-public
         - traefik.constraint-label=traefik-public
-        - traefik.http.routers.ucf_fe-http.rule=Host(`ucffe.example.com`)
+        - traefik.http.routers.ucf_fe-http.rule=Host(`ucffe.vijaystroup.com`)
         - traefik.http.routers.ucf_fe-http.entrypoints=http
         - traefik.http.routers.ucf_fe-http.middlewares=https-redirect
-        - traefik.http.routers.ucf_fe-https.rule=Host(`ucffe.example.com`)
+        - traefik.http.routers.ucf_fe-https.rule=Host(`ucffe.vijaystroup.com`)
         - traefik.http.routers.ucf_fe-https.entrypoints=https
         - traefik.http.routers.ucf_fe-https.tls=true
         - traefik.http.routers.ucf_fe-https.tls.certresolver=le
