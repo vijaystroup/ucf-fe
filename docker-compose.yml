@@ -1,6 +1,6 @@
 version: '3'
 services:
-  ucf-fe:
-    image: ucf-fe
+  ucf_fe:
+    image: ucf_fe
     ports:
       - "80:80"
