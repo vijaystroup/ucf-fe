@@ -13,7 +13,8 @@ def get_page(url):
     req = requests.get(url, timeout=3)
     if req.status_code == 200:
         try:
-            return BeautifulSoup(req.text, features='lxml')
+            # return BeautifulSoup(req.text, features='lxml')
+            return BeautifulSoup(req.text)
         except Exception as e:
             return (-1, e)
     return (-1, f'error requesting: {url}\nstatus: {req.status_code}')
