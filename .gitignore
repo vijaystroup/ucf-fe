@@ -1,5 +1,8 @@
 tempCodeRunner*
+__pycache__
 *.pdf
+*.pyc
+ucf-fe-venv
 
 !FE-FormulaSheet.pdf
 !instructions.pdf

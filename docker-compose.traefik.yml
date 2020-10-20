@@ -1,24 +1,24 @@
 version: '3'
 services:
   ucf-fe:
-    image: docker.pkg.github.com/vijaystroup/ucf-fe/ucf-fe:latest
+    image: ucf-fe
     networks:
       - traefik-public
     deploy:
       mode: replicated
-      replicas: 3
+      replicas: 2
       labels:
         - traefik.enable=true
         - traefik.docker.network=traefik-public
         - traefik.constraint-label=traefik-public
-        - traefik.http.routers.ucf_fe-http.rule=Host(`ucffe.example.com`)
-        - traefik.http.routers.ucf_fe-http.entrypoints=http
-        - traefik.http.routers.ucf_fe-http.middlewares=https-redirect
-        - traefik.http.routers.ucf_fe-https.rule=Host(`ucffe.example.com`)
-        - traefik.http.routers.ucf_fe-https.entrypoints=https
-        - traefik.http.routers.ucf_fe-https.tls=true
-        - traefik.http.routers.ucf_fe-https.tls.certresolver=le
-        - traefik.http.services.ucf_fe.loadbalancer.server.port=80
+        - traefik.http.routers.ucf-fe-http.rule=Host(`ucffe.example.com`)
+        - traefik.http.routers.ucf-fe-http.entrypoints=http
+        - traefik.http.routers.ucf-fe-http.middlewares=https-redirect
+        - traefik.http.routers.ucf-fe-https.rule=Host(`ucffe.example.com`)
+        - traefik.http.routers.ucf-fe-https.entrypoints=https
+        - traefik.http.routers.ucf-fe-https.tls=true
+        - traefik.http.routers.ucf-fe-https.tls.certresolver=le
+        - traefik.http.services.ucf-fe.loadbalancer.server.port=80
 
 networks:
   traefik-public:

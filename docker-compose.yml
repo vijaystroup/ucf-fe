@@ -1,8 +1,6 @@
 version: '3'
 services:
   ucf-fe:
-    image: docker.pkg.github.com/vijaystroup/ucf-fe/ucf-fe:latest
-    environment:
-      - MODULE_NAME=app
+    image: ucf-fe
     ports:
       - "80:80"
