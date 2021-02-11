@@ -28,6 +28,8 @@ def transform_table(table):
         return (-1, f'error finding "tr" children')
     rows.pop(0) # remove info row
 
+    rows = rows[2:] # temp delete jan21 till info section is added
+
     exams = {}
     for row in rows[::2]:
         exam_info = row.findChildren('td')
