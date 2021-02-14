@@ -112,6 +112,16 @@ a {
     margin-bottom: 0;
 }
 
+.donate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+.donate > p {
+    margin: 0;
+}
+
 footer {
     display: flex;
     justify-content: space-between;
@@ -142,6 +152,10 @@ footer {
 #theme {
     transition: transform 300ms ease;
     color: var(--text-primary);
+}
+
+#address {
+    color: var(--text-secondary);
 }
 
 /* Small screens */
@@ -185,6 +199,12 @@ footer {
 
     #title {
         font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 1316px) {
+    .donate {
+        flex-direction: column;
     }
 }
 
