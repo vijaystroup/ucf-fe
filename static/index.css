@@ -4,6 +4,7 @@ html, body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     transition: background 300ms ease;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .light {
@@ -53,7 +54,12 @@ a {
     resize: none;
     background-color: var(--bg-secondary);
     border-color: var(--bg-primary);
-    color: var(--text-primary)
+    color: var(--text-primary);
+    outline: none;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: .05ch;
 }
 
 .col iframe {
@@ -190,6 +196,7 @@ footer {
         width: 100%;
         align-self: center;
         height: 50vh;
+        outline: none;
     }
     
     footer {
