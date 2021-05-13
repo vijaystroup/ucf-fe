@@ -45,21 +45,20 @@ a {
 }
 
 .right {
-    margin-left: 1rem;
+    margin: 0 1rem;
 }
 
 .right textarea {
-    width: 97%;
-    height: 60%;
+    height: 70%;
     resize: none;
     background-color: var(--bg-secondary);
     border-color: var(--bg-primary);
     color: var(--text-primary);
     outline: none;
     font-family: 'Ubuntu', sans-serif;
-    font-weight: 600;
     font-size: 1.2rem;
     letter-spacing: .05ch;
+    padding: .5rem;
 }
 
 .col iframe {
@@ -128,6 +127,14 @@ a {
     margin: 0;
 }
 
+.donate > a > button {
+    background-color: var(--text-secondary);
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: .5rem;
+}
+
 footer {
     display: flex;
     justify-content: space-between;
@@ -179,12 +186,16 @@ footer {
     }
 
     .right {
-        margin-left: 0;
+        margin: 0;
         height: 100vh;
     }
 
     .nav {
         flex-direction: row;
+    }
+
+    .info {
+        margin: 0 1rem;
     }
 
     .tools {
@@ -193,10 +204,9 @@ footer {
 
     textarea {
         margin-top: 1rem;
-        width: 100%;
+        width: 95%;
         align-self: center;
         height: 50vh;
-        outline: none;
     }
     
     footer {
