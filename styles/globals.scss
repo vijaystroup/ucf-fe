@@ -6,6 +6,13 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.dark {
+  --color-primary: white;
+  --color-secondary: #FFCC00;
+  --background-primary: #121212;
+  --background-secondary: #1F1F1F;
+}
+
 a {
   color: inherit;
   text-decoration: none;
