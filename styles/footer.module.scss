@@ -7,6 +7,12 @@
   padding:.1rem;
   bottom: 0;
 
+  * {
+    min-width: 10rem;
+    display: flex;
+    justify-content: center;
+  }
+
   #donate {
     font-weight: 800;
 

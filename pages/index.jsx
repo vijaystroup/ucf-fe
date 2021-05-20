@@ -14,7 +14,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div style={{height: '87vh'}}>
+      <div className={style.all}>
         <header>
           <Nav />
         </header>
