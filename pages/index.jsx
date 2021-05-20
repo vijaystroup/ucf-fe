@@ -3,6 +3,7 @@ import Nav from '../components/nav'
 import Pdf from '../components/pdf'
 import Code from '../components/code'
 import style from '../styles/home.module.scss'
+import Footer from '../components/footer'
 
 export default function Home() {
   return (
@@ -26,10 +27,7 @@ export default function Home() {
             <Code />
           </section>
         </main>
-        <footer className={style.footer}>
-          <p>For my fellow Knights</p>
-          <a id={style.donate} href='https://paypal.me/vijaystroup' target='_blank'>❤️ Donate</a>
-        </footer>
+        <Footer />
       </div>
     </>
   )

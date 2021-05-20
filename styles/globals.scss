@@ -11,6 +11,7 @@ body {
   background-color: var(--background-primary);
   color: var(--color-primary);
   font-family: 'Nunito';
+  transition: .25s;
 }
 
 .dark {
@@ -18,6 +19,13 @@ body {
   --color-secondary: #FFCC00;
   --background-primary: #121212;
   --background-secondary: #1F1F1F;
+}
+
+.light {
+  --color-primary: black;
+  --color-secondary: #2495ff;
+  --background-primary: white;
+  --background-secondary: #F0F0F0;
 }
 
 a {
