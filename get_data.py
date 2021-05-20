@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 from data_transform import make_questions, make_answers
 
-path = os.path.abspath(os.path.dirname(__name__)) + '/static'
+path = os.path.abspath(os.path.dirname(__name__)) + '/public'
 
 
 def get_page(url):
