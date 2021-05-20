@@ -13,20 +13,22 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <header>
-        <Nav />
-      </header>
-      <main className={style.main}>
-        <section className={style.left}>
-          <Pdf />
-        </section>
-        <section className={style.right}>
-          <Code />
-        </section>
-      </main>
-      <footer>
-        <p>For my fellow Knights</p>
-      </footer>
+      <div style={{height: '100vh'}}>
+        <header>
+          <Nav />
+        </header>
+        <main className={style.main}>
+          <section className={style.left}>
+            <Pdf />
+          </section>
+          <section className={style.right}>
+            <Code />
+          </section>
+        </main>
+        <footer>
+          <p>For my fellow Knights</p>
+        </footer>
+      </div>
     </>
   )
 }

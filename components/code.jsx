@@ -1,12 +1,14 @@
+import Editor from '@monaco-editor/react'
+
 export default function Code() {
   return (
     <>
-      <textarea />
-      <div>
-        <h2>Exam Info</h2>
-        <a>Refrence Sheet</a>
-        <a>Exam Statistics</a>
-      </div>
+      <Editor
+        height='100%'
+        defaultLanguage='cpp'
+        defaultValue='// your solution'
+        theme='vs-dark'
+      />
     </>
   )
 }
