@@ -1,6 +1,6 @@
 import style from '../styles/footer.module.scss'
 
-export default function Footer() {
+export default function Footer({ setTheme }) {
   const theme = (
     <svg
       id={style.theme}
@@ -16,8 +16,13 @@ export default function Footer() {
   function switchTheme() {
     const theme = document.body.className
 
-    if (theme == 'light') document.body.className = 'dark'
-    else document.body.className = 'light'
+    if (theme == 'light') {
+      document.body.className = 'dark'
+      setTheme(0)
+    } else {
+      document.body.className = 'light'
+      setTheme(1)
+    }
   }
 
   return (

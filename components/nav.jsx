@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { startTimer, stopTimer } from '../lib/timer'
 import style from '../styles/nav.module.scss'
@@ -14,7 +13,7 @@ export default function Nav() {
       <path d='M5 3.5h6A1.5 1.5 0 0 1 12.5 5v6a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 11V5A1.5 1.5 0 0 1 5 3.5z'/>
     </svg>
   )
-  
+
   const [played, setPlayed] = useState(false)
 
   function playStop() {

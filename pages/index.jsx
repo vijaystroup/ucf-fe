@@ -4,8 +4,11 @@ import Pdf from '../components/pdf'
 import Code from '../components/code'
 import style from '../styles/home.module.scss'
 import Footer from '../components/footer'
+import { useState } from 'react'
 
 export default function Home() {
+  const [theme, setTheme] = useState(0)
+
   return (
     <>
       <Head>
@@ -24,10 +27,10 @@ export default function Home() {
           </section>
           <div id={style.bar}></div>
           <section className={style.right}>
-            <Code />
+            <Code theme={theme ? 'light' : 'dark'} />
           </section>
         </main>
-        <Footer />
+        <Footer setTheme={setTheme} />
       </div>
     </>
   )
