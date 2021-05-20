@@ -13,7 +13,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div style={{height: '100vh'}}>
+      <div style={{height: '87vh'}}>
         <header>
           <Nav />
         </header>
@@ -21,12 +21,14 @@ export default function Home() {
           <section className={style.left}>
             <Pdf />
           </section>
+          <div id={style.bar}></div>
           <section className={style.right}>
             <Code />
           </section>
         </main>
-        <footer>
+        <footer className={style.footer}>
           <p>For my fellow Knights</p>
+          <a id={style.donate} href='https://paypal.me/vijaystroup' target='_blank'>❤️ Donate</a>
         </footer>
       </div>
     </>
