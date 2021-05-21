@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Nav from '../components/nav'
 import Pdf from '../components/pdf'
 import Code from '../components/code'
@@ -40,12 +39,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>UCF FE Practice</title>
-        <meta name='description' content='UCF Computer Science Foundation Exam rapid pace practice.' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
       <div className={style.all}>
         <Nav pdf={pdf} setPdf={setPdf} setComments={setComments} />
         <main className={style.main}>
