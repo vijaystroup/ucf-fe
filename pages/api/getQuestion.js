@@ -5,7 +5,7 @@ const { serverRuntimeConfig } = getConfig()
 
 export default async function handler(req, res) {
   const data = {}
-  const files = readdirSync(join(serverRuntimeConfig.PROJECT_ROOT, './public/question'))
+  const files = readdirSync(join(serverRuntimeConfig.PROJECT_ROOT, './question'))
   console.log(__dirname)
 
   const file = files[Math.floor(Math.random() * files.length)]
