@@ -1,6 +1,6 @@
 {
   "functions": {
-    "pages/api/getQuestion.js": {
+    "api/getQuestion.js": {
       "includeFiles": "public/question/**"
     }
   }
