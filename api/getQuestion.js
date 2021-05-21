@@ -1,9 +1,9 @@
 import { readdirSync } from 'fs'
 import { join } from 'path'
 
-module.exports = (req, res) => {
+const getData = (req, res) => {
   const data = {}
-  const files = readdirSync(join(serverRuntimeConfig.PROJECT_ROOT, './question'))
+  const files = readdirSync(join(__dirname, './question'))
   
   const file = files[Math.floor(Math.random() * files.length)]
   const n = file.split('.')[0].split('-')[2]
@@ -12,6 +12,8 @@ module.exports = (req, res) => {
   data['question'] = `/question/${file}`
   data['answer'] = `/answer/FE-${month}-Sol-${n}.pdf`
   data['info'] = `/info/Info-${month}.pdf`
-  
-  res.status(200).json(data)
+
+  return data
 }
+
+exports.getData = getData
