@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { startTimer, stopTimer } from '../lib/timer'
 import style from '../styles/nav.module.scss'
 
-export default function Nav({ pdf, setPdf }) {
+export default function Nav({ pdf, setPdf, setComments }) {
   const play = (
     <svg id={style.play} xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 16 16' onClick={playStop}>
       <path d='m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z'/>
@@ -28,6 +28,10 @@ export default function Nav({ pdf, setPdf }) {
       fetch('/api/getQuestion').then(res => res.json()).then(j => setPdf(j))
     } else {
       pdfElement.src = pdf['question']
+      setComments((
+        `// formula sheet: https://ucffe.vijaystroup.com/misc/FE-FormulaSheet.pdf${'\n'}` +
+        `// statistics: https://ucffe.vijaystroup.com${pdf['info']}${'\n\n'}`
+      ))
       startTimer(timer, playBtn, stopBtn)
     }
     setPlayed(!played)

@@ -18,8 +18,6 @@ export default function Home() {
     `// statistics: ${pdf['info']}${'\n\n'}`
   ))
 
-  useEffect(() => console.log(pdf), [pdf])
-
   function resize(e) {
     e = e.target
     console.log('down')
@@ -38,7 +36,7 @@ export default function Home() {
       </Head>
 
       <div className={style.all}>
-        <Nav pdf={pdf} setPdf={setPdf} />
+        <Nav pdf={pdf} setPdf={setPdf} setComments={setComments} />
         <main className={style.main}>
           <section className={style.left}>
             <Pdf />
