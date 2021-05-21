@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--background-secondary);
+  color: var(--color-primary);
+  padding:.1rem;
+  bottom: 0;
+
+  * {
+    min-width: 33%;
+    text-align: center;
+  }
+
+  #donate {
+    font-weight: 800;
+
+    &:hover {
+      color: var(--color-secondary);
+    }
+  }
+}
+
+#theme {
+  height: 1.5rem;
+  cursor: pointer;
+}

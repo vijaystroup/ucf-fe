@@ -1,0 +1,66 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background-color: var(--background-secondary);
+  box-shadow: var(--shadow);
+  margin-bottom: .5rem;
+
+  .title {
+    font-size: 2rem;
+    margin: .5rem 0;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+
+    svg {
+      cursor: pointer;
+    }
+
+    #play, #stop {
+      height: 4rem;
+      width: auto;
+      margin: 0 1.5rem;
+    }
+
+    #play {
+      color: rgb(0, 255, 0);
+    }
+
+    #stop {
+      color: red;
+      display: none;
+    }
+
+    #theme {
+      height: 2.5rem;
+      width: auto;
+    }
+
+    p {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    select {
+      outline: none;
+      font-size: 1.2rem;
+      font-family: 'Nunito';
+      background-color: var(--background-primary);
+      color: var(--color-primary);
+      border: none;
+    }
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .nav {
+    .controls {
+      select {
+        font-size: 1rem;
+      }
+    }
+  }
+}
