@@ -21,10 +21,6 @@ class MyDocument extends Document {
               gtag('config', 'UA-154671018-1');
             `}}
           />
-
-          <title>UCF FE Practice</title>
-          <meta name='description' content='UCF Computer Science Foundation Exam rapid pace practice.' />
-          <link rel='icon' href='/favicon.ico' />
         </Head>
         <body className='dark'>
           <Main />
