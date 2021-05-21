@@ -1,7 +1,7 @@
 import style from '../styles/pdf.module.scss'
 
-export default function Pdf() {
+export default function Pdf({ question }) {
   return (
-    <iframe id={style.pdf} src='/misc/instructions.pdf' />
+    <iframe id={style.pdf} src={question} />
   )
 }
