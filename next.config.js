@@ -1,5 +1,5 @@
 module.exports = {
   serverRuntimeConfig: {
-    PROJECT_ROOT: __dirname
+    PROJECT_ROOT: './'
   }
 }
