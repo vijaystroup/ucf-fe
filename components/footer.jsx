@@ -27,7 +27,7 @@ export default function Footer({ setTheme }) {
 
   return (
     <footer className={style.footer}>
-      <p>For my fellow Knights</p>
+      <p>Made by <a href='https://www.vijaystroup.com'>Vijay Stroup</a> for my fellow Knights</p>
       <a id={style.donate} href='https://paypal.me/vijaystroup' target='_blank'>❤️ Donate</a>
       {theme}
     </footer>
