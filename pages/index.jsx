@@ -8,6 +8,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [theme, setTheme] = useState(0)
+  const [pdf, setPdf] = useState('/misc/instructions.pdf')
 
   return (
     <>
@@ -18,12 +19,10 @@ export default function Home() {
       </Head>
 
       <div className={style.all}>
-        <header>
-          <Nav />
-        </header>
+        <Nav setPdf={setPdf} />
         <main className={style.main}>
           <section className={style.left}>
-            <Pdf />
+            <Pdf pdf={pdf} />
           </section>
           <div id={style.bar}></div>
           <section className={style.right}>
