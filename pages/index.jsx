@@ -18,13 +18,22 @@ export default function Home() {
     `// statistics: ${pdf['info']}${'\n\n'}`
   ))
 
-  function resize(e) {
-    e = e.target
-    console.log('down')
-  }
-
   useEffect(() => {
     fetch('/api/getQuestion').then(res => res.json()).then(j => setPdf(j))
+
+    const resizer = document.getElementById(style.bar)
+    const pdfElement = document.getElementById('pdf')
+    resizer.onmousedown = () => {
+      pdfElement.style.zIndex = -1
+      resizer.parentNode.onmousemove = ev => {
+        resizer.previousElementSibling.style.width = ev.clientX - resizer.offsetWidth/2 + 'px'
+        resizer.nextElementSibling.style.width = resizer.parentNode.offsetWidth - ev.clientX - resizer.offsetWidth/2 + 'px'
+      }
+    }
+    resizer.onmouseup = () => {
+      resizer.parentNode.onmousemove=undefined
+      pdfElement.style.zIndex = 1
+    }
   }, [])
 
   return (
@@ -41,7 +50,7 @@ export default function Home() {
           <section className={style.left}>
             <Pdf />
           </section>
-          <div id={style.bar} onMouseDown={e => resize(e)}></div>
+          <div className='resizer' id={style.bar}></div>
           <section className={style.right}>
             <Code theme={theme ? 'light' : 'dark'} comments={comments} />
           </section>
