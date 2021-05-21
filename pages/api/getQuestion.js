@@ -1,8 +1,9 @@
-import fs from 'fs'
+import { readdirSync } from 'fs'
+import { join } from 'path'
 
 export default async function handler(req, res) {
   const data = {}
-  const files = fs.readdirSync('public/question')
+  const files = readdirSync(join(__dirname, 'public/question'))
 
   const file = files[Math.floor(Math.random() * files.length)]
   const n = file.split('.')[0].split('-')[2]
