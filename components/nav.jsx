@@ -15,6 +15,7 @@ export default function Nav({ pdf, setPdf, setComments }) {
   )
 
   const [played, setPlayed] = useState(false)
+  const [history, setHistory] = useState([])
 
   function playStop() {
     const timer = document.getElementById('timer')
@@ -24,6 +25,7 @@ export default function Nav({ pdf, setPdf, setComments }) {
 
     if (played) {
       pdfElement.src = pdf['answer']
+      setHistory([...history, pdf['answer'].replace('/answer/', '').replace('.pdf', '')])
       stopTimer(playBtn, stopBtn)
       fetch('/api/getQuestion').then(res => res.json()).then(j => setPdf(j))
     } else {
@@ -37,11 +39,22 @@ export default function Nav({ pdf, setPdf, setComments }) {
     setPlayed(!played)
   }
 
+  function viewHistory(e) {
+    const pdfElement = document.getElementById('pdf')
+    console.log(e.target)
+    console.log(e.target.value)
+    pdfElement.src = `/answer/${e.target.value}.pdf`
+  }
+
   return (
     <header>
       <nav className={style.nav}>
         <h1 className={style.title}>UCF FE Practice</h1>
         <div className={style.controls}>
+          <select name='history' defaultValue='a' onChange={viewHistory}>
+            <option name='a' disabled>History</option>
+            {history.map(h => <option key={h} value={h}>{h}</option>)}
+          </select>
           {play}
           {stop}
           <p id='timer'>00:00</p>
