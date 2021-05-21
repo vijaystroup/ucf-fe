@@ -26,12 +26,14 @@ export default function Home() {
     resizer.onmousedown = () => {
       pdfElement.style.zIndex = -1
       resizer.parentNode.onmousemove = ev => {
-        resizer.previousElementSibling.style.width = ev.clientX - resizer.offsetWidth/2 + 'px'
-        resizer.nextElementSibling.style.width = resizer.parentNode.offsetWidth - ev.clientX - resizer.offsetWidth/2 + 'px'
+        if (window.innerWidth > 700) {
+          resizer.previousElementSibling.style.width = ev.clientX - resizer.offsetWidth/2 + 'px'
+          resizer.nextElementSibling.style.width = resizer.parentNode.offsetWidth - ev.clientX - resizer.offsetWidth/2 + 'px'
+        }
       }
     }
     resizer.onmouseup = () => {
-      resizer.parentNode.onmousemove=undefined
+      resizer.parentNode.onmousemove = undefined
       pdfElement.style.zIndex = 1
     }
   }, [])
