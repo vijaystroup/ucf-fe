@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { startTimer, stopTimer } from '../lib/timer'
 import style from '../styles/nav.module.scss'
 
-export default function Nav() {
+export default function Nav({ pdf, setPdf }) {
   const play = (
     <svg id={style.play} xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 16 16' onClick={playStop}>
       <path d='m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z'/>
@@ -20,20 +20,29 @@ export default function Nav() {
     const timer = document.getElementById('timer')
     const playBtn = document.getElementById(style.play)
     const stopBtn = document.getElementById(style.stop)
+    const pdfElement = document.getElementById('pdf')
 
-    if (played) stopTimer(playBtn, stopBtn)
-    else startTimer(timer, playBtn, stopBtn)
+    if (played) {
+      pdfElement.src = pdf['answer']
+      stopTimer(playBtn, stopBtn)
+      fetch('/api/getQuestion').then(res => res.json()).then(j => setPdf(j))
+    } else {
+      pdfElement.src = pdf['question']
+      startTimer(timer, playBtn, stopBtn)
+    }
     setPlayed(!played)
   }
 
   return (
-    <nav className={style.nav}>
-      <h1 className={style.title}>UCF FE Practice</h1>
-      <div className={style.controls}>
-        {play}
-        {stop}
-        <p id='timer'>00:00</p>
-      </div>
-    </nav>
+    <header>
+      <nav className={style.nav}>
+        <h1 className={style.title}>UCF FE Practice</h1>
+        <div className={style.controls}>
+          {play}
+          {stop}
+          <p id='timer'>00:00</p>
+        </div>
+      </nav>
+    </header>
   )
 }

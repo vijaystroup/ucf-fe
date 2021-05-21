@@ -9,6 +9,7 @@
   display: flex;
 
   .left, .right {
+    display: flex;
     height: 100%;
     width: 50vw;
   }

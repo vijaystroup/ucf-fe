@@ -7,9 +7,9 @@ export default async function handler(req, res) {
     const n = file.split('.')[0].split('-')[2]
     const month = file.split('.')[0].split('-')[1]
 
-    data['question'] = file
-    data['answer'] = `FE-${month}-Sol-${n}.pdf`
-    data['info'] = `Info-${month}.pdf`
+    data['question'] = `/question/${file}`
+    data['answer'] = `/answer/FE-${month}-Sol-${n}.pdf`
+    data['info'] = `/info/Info-${month}.pdf`
 
     res.status(200).json(data)
   })
