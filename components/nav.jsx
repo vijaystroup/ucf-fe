@@ -51,8 +51,8 @@ export default function Nav({ pdf, setPdf, setComments }) {
       <nav className={style.nav}>
         <h1 className={style.title}>UCF FE Practice</h1>
         <div className={style.controls}>
-          <select name='history' defaultValue='a' onChange={viewHistory}>
-            <option name='a' disabled>History</option>
+          <select name='history' defaultValue='history' onChange={viewHistory}>
+            <option value='history' disabled>History</option>
             {history.map(h => <option key={h} value={h}>{h}</option>)}
           </select>
           {play}
