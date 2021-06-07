@@ -1,7 +1,10 @@
 import os
+import json
 from bs4 import BeautifulSoup
 import requests
+from tqdm import tqdm
 from data_transform import make_questions, make_answers
+import metadata as md
 
 path = os.path.abspath(os.path.dirname(__name__)) + '/public'
 
@@ -71,25 +74,30 @@ def transform_table(table):
 
 
 def dl_pdf(exams):
-    pre_existing = os.listdir(f'{path}/raw_question')
-
-    for key in exams:
+    questions = {}
+    for key in tqdm(exams):
         linkQ, linkA, linkI = exams[key]['question'], exams[key]['answer'], exams[key]['info']
         link_nameQ, link_nameA, link_nameI = linkQ.split('/')[-1], linkA.split('/')[-1], linkI.split('/')[-1]
 
-        if link_nameQ not in pre_existing:
-            rQ, rA, rI = requests.get(linkQ, timeout=1), requests.get(linkA, timeout=1), requests.get(linkI, timeout=1)
+        rQ, rA, rI = requests.get(linkQ, timeout=1), requests.get(linkA, timeout=1), requests.get(linkI, timeout=1)
 
-            with open(f'{path}/raw_question/' + link_nameQ, 'wb') as f:
-                f.write(rQ.content)
-            make_questions(link_nameQ)
+        with open(f'{path}/raw_question/' + link_nameQ, 'wb') as f:
+            f.write(rQ.content)
+        make_questions(link_nameQ)
 
-            with open(f'{path}/raw_answer/' + link_nameA, 'wb') as f:
-                f.write(rA.content)
-            make_answers(link_nameA)
+        # make questions.json file
+        for key in md.questions[link_nameQ].keys():
+            questions[f'{link_nameQ.split(".")[0]}-{key}.pdf'] = None
 
-            with open(f'{path}/info/' + link_nameI, 'wb') as f:
-                f.write(rI.content)
+        with open(f'{path}/raw_answer/' + link_nameA, 'wb') as f:
+            f.write(rA.content)
+        make_answers(link_nameA)
+
+        with open(f'{path}/info/' + link_nameI, 'wb') as f:
+            f.write(rI.content)
+    
+    with open('public/questions.json', 'w') as f:
+        json.dump(questions, f)
 
 
 if __name__ == '__main__':
