@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import getQuestion from '../lib/getQuestion'
 import { startTimer, stopTimer } from '../lib/timer'
 import style from '../styles/nav.module.scss'
 
@@ -17,7 +18,7 @@ export default function Nav({ pdf, setPdf, setComments }) {
   const [played, setPlayed] = useState(false)
   const [history, setHistory] = useState([])
 
-  function playStop() {
+  async function playStop() {
     const timer = document.getElementById('timer')
     const playBtn = document.getElementById(style.play)
     const stopBtn = document.getElementById(style.stop)
@@ -27,7 +28,7 @@ export default function Nav({ pdf, setPdf, setComments }) {
       pdfElement.src = pdf['answer']
       setHistory([...history, pdf['answer'].replace('/answer/', '').replace('.pdf', '')])
       stopTimer(playBtn, stopBtn)
-      fetch('/api/getQuestion').then(res => res.json()).then(j => setPdf(j))
+      setPdf(await getQuestion())
     } else {
       pdfElement.src = pdf['question']
       setComments((
@@ -53,7 +54,7 @@ export default function Nav({ pdf, setPdf, setComments }) {
         <div className={style.controls}>
           <select name='history' defaultValue='history' onChange={viewHistory}>
             <option value='history' disabled>History</option>
-            {history.map(h => <option key={h} value={h}>{h}</option>)}
+            {history.map(h => <option key={`${h}${Math.floor(Math.random() * 100000)}`} value={h}>{h}</option>)}
           </select>
           {play}
           {stop}

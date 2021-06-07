@@ -4,6 +4,7 @@ import Code from '../components/code'
 import style from '../styles/home.module.scss'
 import Footer from '../components/footer'
 import { useEffect, useState } from 'react'
+import getQuestion from '../lib/getQuestion'
 
 export default function Home() {
   const [theme, setTheme] = useState(0)
@@ -17,8 +18,8 @@ export default function Home() {
     `// statistics: ${pdf['info']}${'\n\n'}`
   ))
 
-  useEffect(() => {
-    fetch('/api/getQuestion').then(res => res.json()).then(j => setPdf(j))
+  useEffect(async () => {
+    setPdf(await getQuestion())
 
     const resizer = document.getElementById(style.bar)
     const pdfElement = document.getElementById('pdf')
