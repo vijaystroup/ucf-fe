@@ -15,7 +15,8 @@ export default function Home() {
   })
   const [comments, setComments] = useState((
     `// formula sheet: https://ucffe.vijaystroup.com/misc/FE-FormulaSheet.pdf${'\n'}` +
-    `// statistics: ${pdf['info']}${'\n\n'}`
+    `// statistics: ${pdf['info']}${'\n\n'}` +
+    'int main(void) {\n    printf("Charge On!");\n    return 0;\n}\n'
   ))
 
   useEffect(async () => {
