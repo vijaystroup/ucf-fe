@@ -35,7 +35,7 @@ def transform_table(table):
     # rows = rows[2:]
 
     exams = {}
-    for row in rows[::2]:
+    for row in rows:
         exam_info = row.findChildren('td')
         if len(exam_info) < 1:
             return (-1, f'error finding "td" children')
@@ -79,7 +79,7 @@ def dl_pdf(exams):
         linkQ, linkA, linkI = exams[key]['question'], exams[key]['answer'], exams[key]['info']
         link_nameQ, link_nameA, link_nameI = linkQ.split('/')[-1], linkA.split('/')[-1], linkI.split('/')[-1]
 
-        rQ, rA, rI = requests.get(linkQ, timeout=1), requests.get(linkA, timeout=1), requests.get(linkI, timeout=1)
+        rQ, rA, rI = requests.get(linkQ, timeout=3), requests.get(linkA, timeout=3), requests.get(linkI, timeout=3)
 
         with open(f'{path}/raw_question/' + link_nameQ, 'wb') as f:
             f.write(rQ.content)
