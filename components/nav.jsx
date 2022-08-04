@@ -51,7 +51,6 @@ export default function Nav({ pdf, setPdf, setComments }) {
     <header>
       <nav className={style.nav}>
         <h1 className={style.title}>UCF FE Practice</h1>
-        <a href='https://discord.gg/GbGZDWxdVD' target='_blank' id={style.discord}>Knight's Discord</a>
         <div className={style.controls}>
           <select name='history' defaultValue='history' onChange={viewHistory}>
             <option value='history' disabled>History</option>
