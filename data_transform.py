@@ -21,7 +21,6 @@ def write_pdf(mode_path, name, key, val, pdf):
 
 def make_questions(name):
     """make small question pdfs using metadata"""
-
     pdf = PdfFileReader(open(raw_question + f'/{name}', 'rb'))
     for key, val in md.questions[name].items():
         write_pdf(path_question, name, key, val, pdf)
