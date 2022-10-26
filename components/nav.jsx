@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import getQuestion from "../lib/getQuestion";
 import { startTimer, stopTimer } from "../lib/timer";
 import style from "../styles/nav.module.scss";
-
+import getCategories from "../lib/getCategories";
 export default function Nav({ pdf, setPdf, setComments }) {
   const play = (
     <svg
@@ -30,6 +30,12 @@ export default function Nav({ pdf, setPdf, setComments }) {
   const [played, setPlayed] = useState(false);
   const [history, setHistory] = useState([]);
   const [filterCategories, setFilteredCategories] = useState([]);
+  useEffect(() => {
+    const setCategories = async () => {
+      setFilteredCategories(await getCategories());
+    };
+    setCategories().catch(console.error);
+  }, []);
   async function playStop() {
     const timer = document.getElementById("timer");
     const playBtn = document.getElementById(style.play);
@@ -42,6 +48,7 @@ export default function Nav({ pdf, setPdf, setComments }) {
         ...history,
         pdf["answer"].replace("/answer/", "").replace(".pdf", ""),
       ]);
+
       stopTimer(playBtn, stopBtn);
       setPdf(await getQuestion());
     } else {
@@ -57,8 +64,6 @@ export default function Nav({ pdf, setPdf, setComments }) {
 
   function viewHistory(e) {
     const pdfElement = document.getElementById("pdf");
-    console.log(e.target);
-    console.log(e.target.value);
     pdfElement.src = `/answer/${e.target.value}.pdf`;
   }
 
@@ -67,20 +72,13 @@ export default function Nav({ pdf, setPdf, setComments }) {
       <nav className={style.nav}>
         <h1 className={style.title}>UCF FE Practice</h1>
         <div className={style.controls}>
-          <select
-            name="filterCategory"
-            defaultValue="filter"
-            onChange={viewHistory}
-          >
+          <select name="filterCategory" defaultValue="filter" onChange>
             <option value="filter" disabled>
               Filter by Category
             </option>
-            {history.map((h) => (
-              <option
-                key={`${h}${Math.floor(Math.random() * 100000)}`}
-                value={h}
-              >
-                {h}
+            {filterCategories.map((category) => (
+              <option key={`${category}`} value={category}>
+                {category}
               </option>
             ))}
           </select>

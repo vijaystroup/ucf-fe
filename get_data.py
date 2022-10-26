@@ -75,6 +75,7 @@ def transform_table(table):
 
 def dl_pdf(exams):
     questions = {}
+    
     for key in tqdm(exams):
         linkQ, linkA, linkI = exams[key]['question'], exams[key]['answer'], exams[key]['info']
         link_nameQ, link_nameA, link_nameI = linkQ.split('/')[-1], linkA.split('/')[-1], linkI.split('/')[-1]
@@ -84,10 +85,11 @@ def dl_pdf(exams):
         with open(f'{path}/raw_question/' + link_nameQ, 'wb') as f:
             f.write(rQ.content)
         make_questions(link_nameQ)
-
+        
         # make questions.json file
-        for key in md.questions[link_nameQ].keys():
-            questions[f'{link_nameQ.split(".")[0]}-{key}.pdf'] = None
+        for question_number, question_data in md.questions[link_nameQ].items():
+            category = question_data[2]
+            questions[f'{link_nameQ.split(".")[0]}-{question_number}.pdf'] = category
 
         with open(f'{path}/raw_answer/' + link_nameA, 'wb') as f:
             f.write(rA.content)
@@ -95,7 +97,7 @@ def dl_pdf(exams):
 
         with open(f'{path}/info/' + link_nameI, 'wb') as f:
             f.write(rI.content)
-    
+    print(questions)
     with open('public/questions.json', 'w') as f:
         json.dump(questions, f)
 
