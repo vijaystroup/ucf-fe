@@ -1,0 +1,9 @@
+version: "3"
+services:
+  ucf_fe:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: ucf_fe
+    ports:
+      - 3000:3000

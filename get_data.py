@@ -67,7 +67,7 @@ def transform_table(table):
         exams[key] = {
             'question': question,
             'answer': answer,
-            'info': info
+            'info': info,
         }
 
     return exams
