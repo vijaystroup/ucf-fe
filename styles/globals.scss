@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;800&display=swap");
 
 :root {
   --shadow: 0px 0px 30px -10px black;
@@ -10,23 +10,23 @@ body {
   margin: 0;
   background-color: var(--background-primary);
   color: var(--color-primary);
-  font-family: 'Nunito';
-  transition: .25s;
+  font-family: "Nunito";
+  transition: 0.25s;
   user-select: none;
 }
 
 .dark {
   --color-primary: white;
-  --color-secondary: #FFCC00;
+  --color-secondary: #ffcc00;
   --background-primary: #121212;
-  --background-secondary: #1F1F1F;
+  --background-secondary: #1f1f1f;
 }
 
 .light {
   --color-primary: black;
   --color-secondary: #2495ff;
   --background-primary: white;
-  --background-secondary: #F0F0F0;
+  --background-secondary: #f0f0f0;
 }
 
 a {
