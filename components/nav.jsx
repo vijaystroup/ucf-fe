@@ -30,6 +30,7 @@ export default function Nav({ pdf, setPdf, setComments }) {
   const [played, setPlayed] = useState(false);
   const [history, setHistory] = useState([]);
   const [filterCategories, setFilteredCategories] = useState([]);
+  const [category, setCategory] = useState("");
   useEffect(() => {
     const setCategories = async () => {
       setFilteredCategories(await getCategories());
@@ -50,7 +51,7 @@ export default function Nav({ pdf, setPdf, setComments }) {
       ]);
 
       stopTimer(playBtn, stopBtn);
-      setPdf(await getQuestion());
+      setPdf(await getQuestion(category));
     } else {
       pdfElement.src = pdf["question"];
       setComments(
@@ -72,12 +73,16 @@ export default function Nav({ pdf, setPdf, setComments }) {
       <nav className={style.nav}>
         <h1 className={style.title}>UCF FE Practice</h1>
         <div className={style.controls}>
-          <select name="filterCategory" defaultValue="filter" onChange>
+          <select
+            name="filterCategory"
+            defaultValue="filter"
+            onChange={(e) => setCategory(e.target.value)}
+          >
             <option value="filter" disabled>
               Filter by Category
             </option>
             {filterCategories.map((category) => (
-              <option key={`${category}`} value={category}>
+              <option key={category} value={category}>
                 {category}
               </option>
             ))}
