@@ -5,7 +5,7 @@ import style from "../styles/home.module.scss";
 import Footer from "../components/footer";
 import { useEffect, useState } from "react";
 import getQuestion from "../lib/getQuestion";
-
+import getCategories from "../lib/getCategories";
 export default function Home() {
   const [theme, setTheme] = useState(0);
   const [pdf, setPdf] = useState({
@@ -18,10 +18,11 @@ export default function Home() {
       `// statistics: ${pdf["info"]}${"\n\n"}` +
       'int main(void) {\n    printf("Charge On!");\n    return 0;\n}\n'
   );
-
+  const [filterCategories, setFilteredCategories] = useState([]);
+  const [category, setCategory] = useState("DSN");
   useEffect(async () => {
-    setPdf(await getQuestion());
-
+    setFilteredCategories(await getCategories());
+    setPdf(await getQuestion(category));
     const resizer = document.getElementById(style.bar);
     const pdfElement = document.getElementById("pdf");
     resizer.onmousedown = () => {
@@ -47,7 +48,14 @@ export default function Home() {
   return (
     <>
       <div className={style.all}>
-        <Nav pdf={pdf} setPdf={setPdf} setComments={setComments} />
+        <Nav
+          pdf={pdf}
+          setPdf={setPdf}
+          setComments={setComments}
+          setCategory={setCategory}
+          category={category}
+          categories={filterCategories}
+        />
         <main className={style.main}>
           <section className={style.left}>
             <Pdf />
