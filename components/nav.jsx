@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import getQuestion from "../lib/getQuestion";
 import { startTimer, stopTimer } from "../lib/timer";
 import style from "../styles/nav.module.scss";
-import getCategories from "../lib/getCategories";
 export default function Nav({
   pdf,
   setPdf,
@@ -44,17 +43,14 @@ export default function Nav({
     const pdfElement = document.getElementById("pdf");
 
     if (played) {
-      // Hijacks the pdf to be the one based off the category selected opposed to the default value
-      const hijackedPDF = await getQuestion(category);
-      pdfElement.src = hijackedPDF["answer"];
+      pdfElement.src = pdf["answer"];
       setHistory([
         ...history,
-        hijackedPDF["answer"].replace("/answer/", "").replace(".pdf", ""),
+        pdf["answer"].replace("/answer/", "").replace(".pdf", ""),
       ]);
 
       stopTimer(playBtn, stopBtn);
     } else {
-      // Hijacks the pdf to be the one based off the category selected opposed to the default value
       const hijackedPDF = await getQuestion(category);
       pdfElement.src = hijackedPDF["question"];
       setComments(
@@ -62,6 +58,8 @@ export default function Nav({
           `// statistics: https://ucffe.vijaystroup.com${pdf["info"]}${"\n\n"}`
       );
       startTimer(timer, playBtn, stopBtn);
+      // Sets pdf for modified state for the solution
+      setPdf(hijackedPDF);
     }
     setPlayed(!played);
   }

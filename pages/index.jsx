@@ -22,7 +22,6 @@ export default function Home() {
   const [category, setCategory] = useState("DSN");
   useEffect(async () => {
     setFilteredCategories(await getCategories());
-    setPdf(await getQuestion(category));
     const resizer = document.getElementById(style.bar);
     const pdfElement = document.getElementById("pdf");
     resizer.onmousedown = () => {
