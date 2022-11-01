@@ -2,8 +2,14 @@ import { useEffect, useState } from "react";
 import getQuestion from "../lib/getQuestion";
 import { startTimer, stopTimer } from "../lib/timer";
 import style from "../styles/nav.module.scss";
-import getCategories from "../lib/getCategories";
-export default function Nav({ pdf, setPdf, setComments }) {
+export default function Nav({
+  pdf,
+  setPdf,
+  setComments,
+  setCategory,
+  category,
+  categories,
+}) {
   const play = (
     <svg
       id={style.play}
@@ -29,13 +35,7 @@ export default function Nav({ pdf, setPdf, setComments }) {
 
   const [played, setPlayed] = useState(false);
   const [history, setHistory] = useState([]);
-  const [filterCategories, setFilteredCategories] = useState([]);
-  useEffect(() => {
-    const setCategories = async () => {
-      setFilteredCategories(await getCategories());
-    };
-    setCategories().catch(console.error);
-  }, []);
+
   async function playStop() {
     const timer = document.getElementById("timer");
     const playBtn = document.getElementById(style.play);
@@ -50,14 +50,16 @@ export default function Nav({ pdf, setPdf, setComments }) {
       ]);
 
       stopTimer(playBtn, stopBtn);
-      setPdf(await getQuestion());
     } else {
-      pdfElement.src = pdf["question"];
+      const hijackedPDF = await getQuestion(category);
+      pdfElement.src = hijackedPDF["question"];
       setComments(
         `// formula sheet: https://ucffe.vijaystroup.com/misc/FE-FormulaSheet.pdf${"\n"}` +
           `// statistics: https://ucffe.vijaystroup.com${pdf["info"]}${"\n\n"}`
       );
       startTimer(timer, playBtn, stopBtn);
+      // Sets pdf for modified state for the solution
+      setPdf(hijackedPDF);
     }
     setPlayed(!played);
   }
@@ -66,18 +68,21 @@ export default function Nav({ pdf, setPdf, setComments }) {
     const pdfElement = document.getElementById("pdf");
     pdfElement.src = `/answer/${e.target.value}.pdf`;
   }
-
+  function setCategoryName(e) {
+    const categoryName = e.target.value;
+    setCategory(categoryName);
+  }
   return (
     <header>
       <nav className={style.nav}>
         <h1 className={style.title}>UCF FE Practice</h1>
         <div className={style.controls}>
-          <select name="filterCategory" defaultValue="filter" onChange>
+          <select name="filterCategory" onChange={setCategoryName} multiple>
             <option value="filter" disabled>
               Filter by Category
             </option>
-            {filterCategories.map((category) => (
-              <option key={`${category}`} value={category}>
+            {categories.map((category) => (
+              <option key={category} value={category}>
                 {category}
               </option>
             ))}

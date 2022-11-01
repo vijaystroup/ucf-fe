@@ -97,7 +97,7 @@ def dl_pdf(exams):
 
         with open(f'{path}/info/' + link_nameI, 'wb') as f:
             f.write(rI.content)
-    print(questions)
+    
     with open('public/questions.json', 'w') as f:
         json.dump(questions, f)
 
