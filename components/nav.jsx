@@ -77,11 +77,7 @@ export default function Nav({
       <nav className={style.nav}>
         <h1 className={style.title}>UCF FE Practice</h1>
         <div className={style.controls}>
-          <select
-            name="filterCategory"
-            onChange={setCategoryName}
-            defaultValue="DSN"
-          >
+          <select name="filterCategory" onChange={setCategoryName} multiple>
             <option value="filter" disabled>
               Filter by Category
             </option>
